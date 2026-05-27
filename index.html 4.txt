@@ -3,55 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>BOBBY Code LAB</title>
+
   <style>
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #e2e8f0;
-  margin: 0;
-  padding: 20px;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-}
-
-.box {
-  background: #111827;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-h2 {
-  color: #38bdf8;
-}
-
-select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #0b1220;
-  color: white;
-}
-
-button {
-  padding: 10px 15px;
-  margin-top: 10px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #0ea5e9;
-}
     body {
       font-family: Arial;
       background: #111;
@@ -96,20 +49,50 @@ button:hover {
       padding: 10px;
       min-height: 50px;
     }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <div class="box">
-      <h2>Problem:</h2>
-      <p>Write a program to print "Hello World"</p>
-    </div>
+<div class="container">
+
+  <div class="box">
+    <h2>Problem</h2>
+
+    <select id="problemSelect" onchange="loadProblem()">
+      <option value="0">Print Hello World</option>
+      <option value="1">Add two numbers</option>
+      <option value="2">Check even or odd</option>
+    </select>
+
+    <p id="problemText"></p>
+  </div>
+
+  <div class="box">
+    <h2>Your Code</h2>
+    <textarea id="code">console.log("Hello World");</textarea>
+
+    <button onclick="runCode()">Run Code</button>
+  </div>
+
+  <div class="box">
+    <h2>Output</h2>
+    <pre id="output"></pre>
+  </div>
+
+</div>
+
+<script>
 let problems = [
-  "Write a program to print Hello World",
-  "Write a program to add two numbers",
-  "Write a program to check even or odd"
+  "Print Hello World",
+  "Add two numbers",
+  "Check even or odd"
 ];
 
 function loadProblem() {
@@ -117,87 +100,32 @@ function loadProblem() {
   document.getElementById("problemText").innerText = problems[index];
 }
 
-loadProblem();
-    <div class="box">
-      <h2>Your Code:</h2>
-      <textarea id="code">// write JS code here
-console.log("Hello World");</textarea>
+function runCode() {
+  let outputBox = document.getElementById("output");
+  outputBox.innerHTML = "";
 
-      <button onclick="runCode()">Run Code</button>
-    </div>
+  let code = document.getElementById("code").value;
 
-    <div class="box">
-      <h2>Output:</h2>
-      <pre id="output"></pre>
-    </div>
+  try {
+    let oldLog = console.log;
+    let logs = [];
 
-  </div>
+    console.log = function(msg) {
+      logs.push(msg);
+    };
 
-  <script>
-    function runCode() {
-      let outputBox = document.getElementById("output");
-      outputBox.innerHTML = "";
+    eval(code);
 
-      let code = document.getElementById("code").value;
+    console.log = oldLog;
 
-      try {
-        let oldLog = console.log;
-        let logs = [];
-
-        console.log = function(msg) {
-          logs.push(msg);
-        }
-
-        eval(code);
-
-        console.log = oldLog;
-
-        outputBox.innerHTML = logs.join("\n");
-      } catch (err) {
-        outputBox.innerHTML = "Error: " + err;
-      }
-    }
-  </script>
-<script>
-let problems = [
-  "Write a program to print Hello World",
-  "Write a program to add two numbers (2 + 3)"
-];
-
-function loadProblem() {
-  let index = document.getElementById("problemSelect").value;
-  document.getElementById("problemText").innerText = problems[index];
+    outputBox.innerHTML = logs.join("\n");
+  } catch (err) {
+    outputBox.innerHTML = "Error: " + err;
+  }
 }
 
 loadProblem();
 </script>
+
 </body>
 </html>
-<select id="problemSelect" onchange="loadProblem()">
-  <option value="0">Print Hello World</option>
-  <option value="1">Add two numbers</option>
-  <option value="2">Check even or odd</option>
-</select>
-
-<p id="problemText"></p>
-let problems = [
-  "Write a program to print Hello World",
-  "Write a program to add two numbers",
-  "Write a program to check even or odd"
-];
-
-function loadProblem() {
-  let index = document.getElementById("problemSelect").value;
-  document.getElementById("problemText").innerText = problems[index];
-}
-
-loadProblem();
-
-
-
-
-
-
-
-
-
