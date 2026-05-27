@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BOBBY Code LAB</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #e2e8f0;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.box {
+  background: #111827;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+h2 {
+  color: #38bdf8;
+}
+
+select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0b1220;
+  color: white;
+}
+
+button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .box {
+      background: #222;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      background: #000;
+      color: #0f0;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background: #00c3ff;
+      border: none;
+      color: black;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    pre {
+      background: black;
+      padding: 10px;
+      min-height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="box">
+      <h2>Problem:</h2>
+      <p>Write a program to print "Hello World"</p>
+    </div>
+let problems = [
+  "Write a program to print Hello World",
+  "Write a program to add two numbers",
+  "Write a program to check even or odd"
+];
+
+function loadProblem() {
+  let index = document.getElementById("problemSelect").value;
+  document.getElementById("problemText").innerText = problems[index];
+}
+
+loadProblem();
+    <div class="box">
+      <h2>Your Code:</h2>
+      <textarea id="code">// write JS code here
+console.log("Hello World");</textarea>
+
+      <button onclick="runCode()">Run Code</button>
+    </div>
+
+    <div class="box">
+      <h2>Output:</h2>
+      <pre id="output"></pre>
+    </div>
+
+  </div>
+
+  <script>
+    function runCode() {
+      let outputBox = document.getElementById("output");
+      outputBox.innerHTML = "";
+
+      let code = document.getElementById("code").value;
+
+      try {
+        let oldLog = console.log;
+        let logs = [];
+
+        console.log = function(msg) {
+          logs.push(msg);
+        }
+
+        eval(code);
+
+        console.log = oldLog;
+
+        outputBox.innerHTML = logs.join("\n");
+      } catch (err) {
+        outputBox.innerHTML = "Error: " + err;
+      }
+    }
+  </script>
+<script>
+let problems = [
+  "Write a program to print Hello World",
+  "Write a program to add two numbers (2 + 3)"
+];
+
+function loadProblem() {
+  let index = document.getElementById("problemSelect").value;
+  document.getElementById("problemText").innerText = problems[index];
+}
+
+loadProblem();
+</script>
+</body>
+</html>
+<select id="problemSelect" onchange="loadProblem()">
+  <option value="0">Print Hello World</option>
+  <option value="1">Add two numbers</option>
+  <option value="2">Check even or odd</option>
+</select>
+
+<p id="problemText"></p>
+let problems = [
+  "Write a program to print Hello World",
+  "Write a program to add two numbers",
+  "Write a program to check even or odd"
+];
+
+function loadProblem() {
+  let index = document.getElementById("problemSelect").value;
+  document.getElementById("problemText").innerText = problems[index];
+}
+
+loadProblem();
+
+
+
+
+
+
+
+
+
